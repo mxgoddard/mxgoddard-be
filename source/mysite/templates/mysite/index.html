@@ -1,0 +1,5 @@
+<ul>
+    {% for item in checklist_items %}
+        <li><a href="/mysite/list/{{ item.id }}">{{ item.task }}</a></li>
+    {% endfor %}
+</ul>
