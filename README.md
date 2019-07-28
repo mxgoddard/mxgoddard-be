@@ -6,4 +6,6 @@ If cloning onto a new computer, remember to install Django
 
 ``
 pip install Django
+
+pip install requests
 ``
