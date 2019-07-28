@@ -9,6 +9,7 @@ from django.views.decorators.http import require_http_methods
 
 from .models import Checklist, ShoppingList
 from .helper import Sum
+from .pushups import Test
 
 # Global Variables
 homePath = "http://127.0.0.1:8000/"
@@ -17,12 +18,12 @@ homePath = "http://127.0.0.1:8000/"
 def Index(request):
 
     paths = {
-        "Home": homePath,
-        "Joke": "http://127.0.0.1:8000/joke",
-        "Task": "http://127.0.0.1:8000/json",
-        "List": "http://127.0.0.1:8000/list",
-        "Helper": "http://127.0.0.1:8000/helper",
-        "Fact": "http://127.0.0.1:8000/fact"
+        "Home    [GET] ": homePath,
+        "Joke    [GET] ": "http://127.0.0.1:8000/joke",
+        "Task    [GET] ": "http://127.0.0.1:8000/json",
+        "List    [GET] ": "http://127.0.0.1:8000/list",
+        "Helper [POST]": "http://127.0.0.1:8000/helper",
+        "Fact    [GET] ": "http://127.0.0.1:8000/fact"
     }
 
     return JsonResponse(paths)
@@ -38,7 +39,7 @@ def ShoppingList(request):
 
         shoppingItem = ShoppingList(item="item", cost="cost")
         shoppingItem.save()
-        
+
         response = { "Home": homePath, "Data": shoppingItem.json() }
     elif request.method == 'GET':
         response = { "Home": homePath, "Data": shoppingItem.json() }
@@ -60,7 +61,7 @@ def Fact(request):
 def Json(request):
     taskTimeNow = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    task = { 
+    task = {
             "task": "Return JSON from api requests",
             "severity": "1",
             "complete": "0",
@@ -90,9 +91,9 @@ def Helper(request):
 
     a = body['a']
     b = body['b']
-    
+
     result = Sum(a, b)
-    response = { 
+    response = {
         "Home": "http://127.0.0.1:8000/",
         "Result": result
     }
