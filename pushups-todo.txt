@@ -1,0 +1,59 @@
+https://trello.com/c/eUSIgmxI/167-200-pushups-a-day
+
+Objective is to hit 200 pushups a day for 31 days straight. For each day failed, add on 2 days to the routine. Towards the end when I can hit 200 reasonably comfortably, start timing
+how long it takes to reach 200. Failed days contribute to endurance and strength, in between sets can do other stuff (probably core) like sit-ups that don't use arms or chest. The
+200 can be done over the day bit should try to complete in one session towards end.
+
+TODO:
+
+- Bring notes from the markdown file onto here  [ x ]
+- Get rid of simple methods for pushup methods  [   ]
+
+Ideas:
+
+- Can make a quick console application to act as front end to talk to the back end
+- Send text messages daily reminding
+- Find a good way to store data, incorporate a database somehow? Defo use a database somehow, maybe a record for each day : dayNumber being the PK, date, pushups (default 0). On
+    failure add another record, final date is the max ID in table
+- Nice way to display all the data but focus on backend first
+- Add some sort of running on in the future? Like quickest time to run half a mile etc.
+- Could alternate between pushups and sit-ups?
+- Make a todo / ideas / noted file onto the backend for pushups
+- Count how many pushups were done on failure and add it to count
+- Set goals like X pushups in a row, do it all under a certain time, do X diamond pushups, do a 1 armed pushup etc.
+- Plan better
+- Error handling and logging
+- Integrate with my Django back-end
+- Some sort of way to update whether I've completed a day remotely (not through rig)
+- Milestones, achievements (achievement points)?, gamify
+
+Current Stats:
+
+27/07/2019, failed, 110 pushups, 31 days becomes 33 days
+28/07/2019, complete, 200 pushups, half mile in 4:11
+
+Requests:
+
+GET /pushups (GetRoutineData())
+    Returns an array of objects for the 'routine'. Retrieved data from the database.
+
+    [{ "day": 1, "date": "27/07/2019", "count": 110 },
+    { "day": 2, "date": "28/07/2019", "count": 200 },
+    { "day": 3, "date": "29/07/2019", "count": 0 }]
+
+PATCH /pushups/complete (CompleteDay(date))
+    Where date is the relevant date. Updates the day with 200 pushups, updates record in database
+
+PATCH /pushups/failed (FailedDay(date, count))
+    Where date is the relevant date. Updates the record in db with amount of pushups completed, adds 2 extra days onto the routine
+
+GET /goals (GetGoalsData())
+    Returns an array of objects with all set goals in
+
+    [{ "goal": "Do 30 pushups in a row", "complete": false },
+    { "goal": "Do a 1 arm pushup on each arm", "complete": false }]
+
+POST /goals (SetGoal(goal))
+    Where goal is a string for the goal.
+
+    "Do 5 diamond pushups in a row"
