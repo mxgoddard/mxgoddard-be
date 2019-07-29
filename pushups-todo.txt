@@ -6,8 +6,10 @@ how long it takes to reach 200. Failed days contribute to endurance and strength
 
 TODO:
 
-- Bring notes from the markdown file onto here  [ x ]
-- Get rid of simple methods for pushup methods  [   ]
+- Bring notes from the markdown file onto here      [ x ]
+- Get rid of all simple methods for pushup methods  [   ]
+- Create initial routine table records              [ x ]
+- GET /pushups methods                              [   ]
 
 Ideas:
 
