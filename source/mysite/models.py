@@ -10,12 +10,15 @@ class Checklist(models.Model):
     def __str__(self):
         return self.task
 
-class ShoppingList(models.Model):
-    item = models.CharField(max_length=100)
-    cost = models.DecimalField(max_digits=10, decimal_places=2)
+class Routine(models.Model):
+    id = models.IntegerField(primary_key=True, default=1)
+    day = models.IntegerField(null=False)
+    date = models.DateField(null=False)
+    pushups = models.IntegerField(default=0, null=False)
+    notes = models.CharField(max_length=300, null=True)
 
     def __str__(self):
-        return (self.item, self.cost)
+        return (self.day)
 
 '''
 python manage.py makemigrations mysite

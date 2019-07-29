@@ -7,7 +7,7 @@ from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from django.views.decorators.http import require_http_methods
 
-from .models import Checklist, ShoppingList
+from .models import Checklist
 from .helper import Sum
 from .pushups import Test
 
