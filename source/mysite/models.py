@@ -11,17 +11,16 @@ class Checklist(models.Model):
         return self.task
 
 class Routine(models.Model):
-    id = models.IntegerField(primary_key=True, default=1)
-    day = models.IntegerField(null=False)
+    day = models.IntegerField(null=False, primary_key=True, default=1)
     date = models.DateField(null=False)
     pushups = models.IntegerField(default=0, null=False)
-    notes = models.CharField(max_length=300, null=True)
+    notes = models.CharField(max_length=300, blank=True, default="")
 
     def __str__(self):
-        return (self.day)
+        return (str(self.date))
 
 '''
-python manage.py makemigrations mysite
+python manage.py makemigrations
 python manage.py migrate
 '''
 

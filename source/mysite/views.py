@@ -7,7 +7,7 @@ from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from django.views.decorators.http import require_http_methods
 
-from .models import Checklist
+from .models import Checklist, Routine
 from .helper import Sum
 from .pushups import Test
 
@@ -27,6 +27,11 @@ def Index(request):
     }
 
     return JsonResponse(paths)
+
+def GetRoutineData(request):
+    everything = Routine.objects.all()
+    print(everything[0])
+    return JsonResponse({ "": "" })
 
 @require_http_methods(["GET", "POST"])
 def ShoppingList(request):
