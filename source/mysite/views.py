@@ -53,6 +53,31 @@ def UpdateDay(request):
 
     return JsonResponse({ "Date": date, "Pushups": pushups })
 
+# /pushups/failed
+@require_http_methods(["GET"])
+def FailedDay(request):
+    # Failed day method should only be called after the day is over - Is there a way to automate this?
+    # Need to add 2 days onto the routine on failure
+    # Need some error handling - day can 
+    # Try to call this method as little as possible
+
+    startDate = "2019-07-27"
+    originalFinalDate = "2019-07-26"
+    numDaysInRoutine = 31
+
+    # Query DB for all days prior where pushups != 200
+    # Can use raw sql, need to come up with a query for this
+    for dayObj in Routine.objects.raw("SELECT * FROM mysite_routine WHERE pushups=200"):
+        print(dayObj)
+
+    # Extra days = 200 * failedDays
+
+    # Check if newFinalDate is in DB
+
+    # If not find the latest date and create records up to the newFinalDate
+
+    return JsonResponse({ "a": "b", "c": "d" })
+
 
 # Example of saving values from POST request to DB
 @require_http_methods(["GET", "POST"])

@@ -7,9 +7,6 @@ class Routine(models.Model):
     pushups = models.IntegerField(default=0, null=False)
     notes = models.CharField(max_length=300, blank=True, default="")
 
-    # def __str__(self):
-    #     return (str(self.date))
-
 '''
 python manage.py makemigrations
 python manage.py migrate

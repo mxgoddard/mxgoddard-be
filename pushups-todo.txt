@@ -13,6 +13,8 @@ TODO:
 - Make sure database is not gitignored              [ x ]
 - Get a simple template before branching on git     [   ]
 - Error handle volatile snippets of completed       [   ]
+- Failed a day methods                              [   ]
+- Create some sort of constants page                [   ]
 
 Ideas:
 
