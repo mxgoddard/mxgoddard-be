@@ -2,6 +2,7 @@ import json
 import datetime
 import requests
 
+from django.core import serializers
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.template import loader
@@ -28,8 +29,14 @@ def Index(request):
 @require_http_methods(["GET"])
 def GetRoutineData(request):
     everything = Routine.objects.all()
-    print(everything[0])
-    return JsonResponse({ "": "" })
+    
+    routine = []
+    
+    for dayObj in everything:
+        obj = { "day": dayObj.day, "date": dayObj.date, "pushups": dayObj.pushups, "notes": dayObj.notes }
+        routine.append(obj)
+
+    return JsonResponse({ "Routine": routine })
 
 
 
