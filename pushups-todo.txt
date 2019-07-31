@@ -8,10 +8,11 @@ TODO:
 
 - Bring notes from the markdown file onto here      [ x ]
 - Get rid of all simple methods for pushup methods  [   ]
-- Create initial routine table records              [ x ]
-- GET /pushups methods                              [   ]
+- Create initial routine table records              [   ]
+- GET /pushups methods                              [ x ]
 - Make sure database is not gitignored              [ x ]
 - Get a simple template before branching on git     [   ]
+- Error handle volatile snippets of completed       [   ]
 
 Ideas:
 
@@ -45,8 +46,8 @@ GET /pushups (GetRoutineData())
     { "day": 2, "date": "28/07/2019", "count": 200 },
     { "day": 3, "date": "29/07/2019", "count": 0 }]
 
-PATCH /pushups/complete (CompleteDay(date))
-    Where date is the relevant date. Updates the day with 200 pushups, updates record in database
+POST /pushups/complete (UpdateDay(date, pushups))
+    Where date is the relevant date. Updates the day with the given number of pushups, updates record in database.
 
 PATCH /pushups/failed (FailedDay(date, count))
     Where date is the relevant date. Updates the record in db with amount of pushups completed, adds 2 extra days onto the routine

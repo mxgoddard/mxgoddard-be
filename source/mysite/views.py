@@ -38,6 +38,20 @@ def GetRoutineData(request):
 
     return JsonResponse({ "Routine": routine })
 
+# /pushups/update
+@require_http_methods(["POST"])
+def UpdateDay(request):
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+
+    date = body['date']
+    pushups = body['pushups']
+
+    t = Routine.objects.get(date=date)
+    t.pushups = pushups
+    t.save()
+
+    return JsonResponse({ "Date": date, "Pushups": pushups })
 
 
 # Example of saving values from POST request to DB
