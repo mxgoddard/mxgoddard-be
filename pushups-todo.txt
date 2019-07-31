@@ -10,6 +10,8 @@ TODO:
 - Get rid of all simple methods for pushup methods  [   ]
 - Create initial routine table records              [ x ]
 - GET /pushups methods                              [   ]
+- Make sure database is not gitignored              [ x ]
+- Get a simple template before branching on git     [   ]
 
 Ideas:
 

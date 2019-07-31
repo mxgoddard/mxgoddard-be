@@ -7,7 +7,7 @@ from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from django.views.decorators.http import require_http_methods
 
-from .models import Checklist, Routine
+from .models import Routine
 from .helper import Sum
 from .pushups import Test
 
@@ -18,21 +18,22 @@ homePath = "http://127.0.0.1:8000/"
 def Index(request):
 
     paths = {
-        "Home    [GET] ": homePath,
-        "Joke    [GET] ": "http://127.0.0.1:8000/joke",
-        "Task    [GET] ": "http://127.0.0.1:8000/json",
-        "List    [GET] ": "http://127.0.0.1:8000/list",
-        "Helper [POST]": "http://127.0.0.1:8000/helper",
-        "Fact    [GET] ": "http://127.0.0.1:8000/fact"
+        "a) [GET]": "http://127.0.0.1:8000/",
+        "b) [GET]": "http://127.0.0.1:8000/pushups"
     }
 
     return JsonResponse(paths)
 
+# /pushups
+@require_http_methods(["GET"])
 def GetRoutineData(request):
     everything = Routine.objects.all()
     print(everything[0])
     return JsonResponse({ "": "" })
 
+
+
+# Example of saving values from POST request to DB
 @require_http_methods(["GET", "POST"])
 def ShoppingList(request):
     if request.method == 'POST':
@@ -51,30 +52,7 @@ def ShoppingList(request):
 
     return JsonResponse(response)
 
-
-def Fact(request):
-    URL = "https://uselessfacts.jsph.pl/random.json?language=en"
-    HEADERS = { "content-type": "application/json", "accept": "application/json" }
-
-    r = requests.get( url = URL, headers = HEADERS )
-    data = r.json()
-
-    response = { "Home": homePath, "Data": data }
-
-    return JsonResponse(response)
-
-def Json(request):
-    taskTimeNow = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-    task = {
-            "task": "Return JSON from api requests",
-            "severity": "1",
-            "complete": "0",
-            "added": taskTimeNow
-        }
-
-    return JsonResponse(task)
-
+# Example of making a request to a 3rd party API
 def Joke(request):
     URL = "https://icanhazdadjoke.com/"
     HEADERS = { "content-type": "application/json", "accept": "application/json" }
@@ -86,6 +64,7 @@ def Joke(request):
 
     return JsonResponse(response)
 
+# Example of taking values from a POST request
 @require_http_methods(["POST"])
 def Helper(request):
     response = {}
