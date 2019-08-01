@@ -1,5 +1,5 @@
 import json
-import datetime
+from datetime import date, datetime, timedelta
 import requests
 
 from django.core import serializers
@@ -62,17 +62,24 @@ def FailedDay(request):
     # Try to call this method as little as possible
 
     startDate = "2019-07-27"
-    originalFinalDate = "2019-07-26"
+    originalFinalDate = "2019-08-26"
     numDaysInRoutine = 31
 
     # Query DB for all days prior where pushups != 200
     # Can use raw sql, need to come up with a query for this
-    for dayObj in Routine.objects.raw("SELECT * FROM mysite_routine WHERE pushups=200"):
-        print(dayObj)
+    todayDate = datetime.today().strftime("%Y-%m-%d")
+    extraDays = 0
 
-    # Extra days = 200 * failedDays
+    for dayObj in Routine.objects.raw("SELECT * FROM mysite_routine WHERE pushups != 200 AND date < %s;", [todayDate]):
+        extraDays += 1
 
-    # Check if newFinalDate is in DB
+    # Extra days = 2 * failedDays
+    extraDays *= 2
+
+    # Check if newFinalDate is in DB - Add extraDays onto date
+    tempOriginalDate = datetime.strptime(originalFinalDate, "%Y-%m-%d")
+    newFinalDate = tempOriginalDate + timedelta(days=extraDays)
+    print(newFinalDate)
 
     # If not find the latest date and create records up to the newFinalDate
 
