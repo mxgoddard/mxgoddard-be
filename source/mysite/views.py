@@ -81,7 +81,9 @@ def FailedDay(request):
     newFinalDate = tempOriginalDate + timedelta(days=extraDays)
     print(newFinalDate)
 
-    # If not find the latest date and create records up to the newFinalDate
+    # If not find the latest date and create records up to the newFinalDate - array of objects containing day no. and date
+    for maxDate in Routine.objects.raw("SELECT * FROM mysite_routine WHERE pushups != 200 AND date < %s;", [todayDate]):
+        extraDays += 1
 
     return JsonResponse({ "a": "b", "c": "d" })
 
